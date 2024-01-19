@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            display: grid;
+            grid-template-columns: 3fr 9fr;
+
+        }
+
+        #price{
+            font-size: 30px;
+            color: green;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        #actualPrice{
+            color: red;
+        }
+    </style>
+
+    <script>
+
+        // function bodyLoad(){
+          
+        //     fetch("./data/mobile.json").then((response)=>{
+        //   return response.json();
+        //   })
+        //   .then(function (mobile){
+        //     document.getElementById('imgProduct').src = mobile.image
+        //   })
+        // }
+
+        function bodyLoad(){
+
+            fetch("./data/mobile.json").then(async (res) =>{
+                const value = await res.json();
+
+                document.getElementById('imgProduct').src = value.image
+
+                document.getElementById('title').innerHTML = value.title
+
+                document.getElementById('price').innerHTML = value.price.toLocaleString('en-in',{style:'currency',currency:'INR'})
+
+
+                document.getElementById('actualPrice').innerHTML = value.actualPrice.toLocaleString('en-in',{style:'currency',currency:'INR'})
+            })
+        }
+
+
+    </script>
+</head>
+<body onload="bodyLoad()">
+    <div class="container">
+        <div>
+            <img id="imgProduct" width="80%" height="400">
+        </div>
+
+        <div>
+           <div>
+            <h1 id="title"></h1>
+           </div>
+           <div>
+            <span id="price"></span>
+            <strike id="actualPrice"></strike>
+           </div>
+           
+        </div>
+    </div>
+</body>
+</html>

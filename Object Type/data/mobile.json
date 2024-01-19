@@ -1,0 +1,7 @@
+{
+    "title":"SAMSUNG Galaxy S24 ULtra 5g",
+    "price":1399999,
+    "actualPrice": 1500000,
+    "Offers":["1st offer","2ndOffer","3rd Offer","4Th offer"],
+     "image":"../images/samsung.png"
+}

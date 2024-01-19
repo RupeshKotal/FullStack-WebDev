@@ -1,0 +1,34 @@
+<script>
+    var tv = "samnsung Tv";
+    var mobile = "Iphone";
+    var price = 54600;
+
+    var elctronics = [{
+     Item: "Tv",
+     brand: "Samnsung",
+     price : 54000,
+     Stock: true,
+     ShippedTo:["Delhi","hyd"],
+     Rating:{
+        rate:4.3,
+        Count: 5000
+     }
+    },
+    {
+     Item: "Mobile",
+     brand: "Apple",
+     price : 49990,
+     Stock: true,
+     ShippedTo:["Delhi","Mumbai"],
+     Rating:{
+        rate:4.9,
+        Count: 3000
+     }
+    }]
+
+//    elctronics.map((item)=>{document.write(`<br/> Item = ${item.Item} <br/> Price = ${item.price} <br/> Stock = ${item.Stock} <br/> Shipped To = ${item.ShippedTo[0]} / ${item.ShippedTo[1]} <br/> Rating = ${item.Rating.rate}[${item.Rating.Count}]`)})
+
+   Object.keys(elctronics[0]).map((item)=>{
+    document.write(`<br>${item} : ${elctronics[0][item]}`)
+   })
+</script>
