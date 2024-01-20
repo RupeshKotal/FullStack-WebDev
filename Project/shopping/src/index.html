@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script>
+      
+      function Catageryload(){
+        fetch("https://fakestoreapi.com/products/categories").then(async (res)=>{
+            let value = await res.json()
+            value.unshift('All')
+            value.map((res)=>{
+                  let option =document.createElement('option')
+                  option.text = res;
+                  option.value= res;
+                  document.getElementById('lstcatagery').appendChild(option)
+            })
+        })
+      }
+
+      function loadProduct(){
+         fetch("https://fakestoreapi.com/products").then( async (res)=>{
+            const value = await res.json();
+
+            value.map((product)=>{
+                var div= document.createElement('div');
+                div.className = 'card p-2 m-2';
+                div.style.width = "200px";
+                div.innerHTML = `<img src =${product.image} class="card-img-top" height="140">
+
+            
+                <div class="card-header" style="height:120px">
+                    ${product.title}
+                    </div>
+
+                    <div class="card-body">
+                        <dl>
+                            <dt>Price</dt>
+                            <dd>${product.price}</dd>
+
+                            <dt>Rating</dt>
+                            <dd>
+                                  ${product.rating.rate}<span class='bi bi-star-fill text-success'></span>[${product.rating.count}]
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-dark w-100 bi bi-cart"> Add To Cart</button>
+                        </div>
+                `
+
+                document.querySelector('main').appendChild(div)
+            })
+         })
+      }
+
+       function bodyLoad(){
+        Catageryload();
+        loadProduct()
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyLoad()">
+    <header class="d-flex justify-content-between bg-black  text-bg-danger w-100 p-2">
+
+        <div class="ms-1">
+            <span class="text-danger fw-bold ">A-to-Z-Shopimg</span>
+        </div>
+
+        <div>
+        <a class="me-4 text-decoration-none text-light" href="#">Home</a>
+        <a class="me-4 text-decoration-none text-light" href="#">Electronics</a>
+        <a class="me-4 text-decoration-none text-light" href="">Mens Fashion</a>
+        <a class="me-4 text-decoration-none text-light" href="#">Jwelary</a>
+        </div>
+
+        <div>
+            <button class="btn btn-warning bi bi-cart4 position-relative"> Your Cart <span class="badge position-absolute bg-danger rounded rounded-circle">0</span> </button>
+        </div>
+    </header>
+
+    <section class="mt-4 row">
+
+        <nav class="col-2">
+      <div>
+        <label class="form-label fw-bold">Select Catagery</label>
+      </div>
+      <div>
+         <select class="form-select" id="lstcatagery"></select>
+      </div>
+
+        </nav>
+
+        <main class="col-10 d-flex flex-wrap overflow-auto" style="height: 500px;">
+
+        </main>
+    </section>
+
+    <!-- <script src="../node_modules/jquery/dist/jquery.js"></script> -->
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
