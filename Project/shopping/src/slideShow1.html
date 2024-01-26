@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <script>
+   function LoadProduct(id){
+     fetch(`https://fakestoreapi.com/products/${id}`).then(async (res)=>{
+       const response = await res.json();
+
+
+       document.getElementById('imgProduct').src = `${response.image}`
+       document.getElementById('lblTitle').innerHTML = `${response.title}`
+
+
+
+     })
+    }
+
+    let count =1;
+    
+
+     function loadProduct(){
+        count++ ;
+
+        fetch(`https://fakestoreapi.com/products/${count}`).then(async (res)=>{
+       const response = await res.json();
+        
+
+
+        document.getElementById('imgProduct').src = `${response.image}`
+       document.getElementById('lblTitle').innerHTML = `${response.title}`
+        
+
+     })
+   }
+
+   let flag;
+
+   function PlayClick(){
+   flag = setInterval(loadProduct,1000)
+   }
+
+ function PauseClick(){
+    clearTimeout(flag)
+ }
+
+
+
+  </script>
+
+</head>
+<body>
+    
+
+
+    <body onload="LoadProduct(1)" class="container-fluid d-flex justify-content-center">
+        <div class="mt-4 card p-2" style="width: 800px;">
+           <div class="card-header text-center fw-bold">
+               <label id="lblTitle"></label><br><br>
+               <label id="lblStatus"></label>
+           </div>
+           <div class="card-body">
+             <div class="row">
+                <div class="col-1 d-flex flex-column justify-content-center">
+                    <button onclick="PrevClick()" class="bi bi-chevron-left btn btn-dark"></button>
+                </div>
+                <div class="col-9">
+                    <img width="100%" height="400" id="imgProduct">
+                </div>
+                <div class="col-1 d-flex flex-column justify-content-center">
+                    <button onclick="NextClick()" class="bi bi-chevron-right btn btn-dark"></button>
+                </div>
+             </div>
+           </div>
+           <div class="card-footer text-center">
+                <button onclick="PlayClick()" class="btn btn-primary bi bi-play"></button>
+                <button onclick="PauseClick()" class="btn btn-danger bi bi-pause"></button>
+           </div>
+        </div>
+    </body>
+</body>
+</html>

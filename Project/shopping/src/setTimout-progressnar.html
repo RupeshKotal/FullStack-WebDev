@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script>
+        var count = 1;
+       function showProgress(){
+        count++
+        document.getElementById('Progres').value = count;
+        document.getElementById('status').innerHTML= count + " % Completed"
+         
+        if(count == 100){
+            clearInterval(flag)
+            document.getElementById('Progres').style.display="none";
+            document.getElementById('status').innerHTML= "Download 100% Completed"
+
+        }
+       }
+
+       let flag;
+        function loadImage(){
+            document.getElementById('btnContainer').style.display="none";
+            document.getElementById('progressBar').style.display="block";
+            flag = setInterval(showProgress,100)
+
+
+        }
+    </script>
+</head>
+<body class="container-fluid d-flex  justify-content-center align-items-center" style="height: 100vh;">
+    <div id="btnContainer">
+        <button class="btn btn-danger" onclick="loadImage()">Load Image</button>
+    </div>
+
+    <div id="progressBar" style="display: none;">
+       <progress id="Progres" min="1" max="100" value="1" ></progress>
+       <p id="status"></p>
+    </div>
+   
+
+    <div id="imgDiv" style="display: none;"><img src="../../../Images/samsung.png" alt=""></div>
+</body>
+</html>
