@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
+    <style>
+        a{
+            color: rgb(38, 137, 224);
+        }
+    </style>
+
     <script>
       
       function Catageryload(){
@@ -22,8 +28,9 @@
         })
       }
 
-      function loadProduct(){
-         fetch("https://fakestoreapi.com/products").then( async (res)=>{
+      function loadProduct(url){
+        document.querySelector("main").innerHTML = " "
+         fetch(url).then( async (res)=>{
             const value = await res.json();
 
             value.map((product)=>{
@@ -59,9 +66,23 @@
          })
       }
 
+
        function bodyLoad(){
         Catageryload();
-        loadProduct()
+        loadProduct("https://fakestoreapi.com/products")
+        // mainSection()
+        }
+
+        function categoryChnaged(){
+            var categaroyname = document.getElementById("lstcatagery").value
+            console.log(categaroyname);
+
+            if(categaroyname == "All"){
+                loadProduct("https://fakestoreapi.com/products") 
+            }else{
+
+                loadProduct(`https://fakestoreapi.com/products/category/${categaroyname}`)
+            }
         }
     </script>
 </head>
@@ -73,9 +94,9 @@
         </div>
 
         <div>
-        <a class="me-4 text-decoration-none text-light" href="#">Home</a>
-        <a class="me-4 text-decoration-none text-light" href="#">Electronics</a>
-        <a class="me-4 text-decoration-none text-light" href="">Mens Fashion</a>
+        <a class="me-4 text-decoration-none text-light" href="javascript:loadProduct('https://fakestoreapi.com/products')">Home</a>
+        <a class="me-4 text-decoration-none text-light" href="javascript:loadProduct('https://fakestoreapi.com/products/category/electronics')">Electronics</a>
+        <a class="me-4 text-decoration-none text-light" href="javascript:loadProduct('https://fakestoreapi.com/products/category/mensfashion')">Mens Fashion</a>
         <a class="me-4 text-decoration-none text-light" href="#">Jwelary</a>
         </div>
 
@@ -84,6 +105,8 @@
         </div>
     </header>
 
+    
+
     <section class="mt-4 row">
 
         <nav class="col-2">
@@ -91,7 +114,10 @@
         <label class="form-label fw-bold">Select Catagery</label>
       </div>
       <div>
-         <select class="form-select" id="lstcatagery"></select>
+         <select class="form-select" onchange="categoryChnaged()" id="lstcatagery">
+
+
+         </select>
       </div>
 
         </nav>
@@ -101,7 +127,12 @@
         </main>
     </section>
 
+    <main class="mt-2 mb-2" style="height: 300px; width: 500px;">
+  
+    </main>
+
     <!-- <script src="../node_modules/jquery/dist/jquery.js"></script> -->
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>
+
