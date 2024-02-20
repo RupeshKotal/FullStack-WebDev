@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-dark w-100 bi bi-cart"> Add To Cart</button>
+                        <button class="btn btn-dark w-100 bi bi-cart" ocClick="AddTocart(${product.id})"> Add To Cart</button>
                         </div>
                 `
 
@@ -66,11 +66,26 @@
          })
       }
 
+      var cartItem =[]
+
+      function getCartCount(){
+        document.getElementById('logic').innerHTML = cartItem.length
+      }
+
+      function AddTocart(productId){
+           fetch(`https://fakestore.com/product/${productId}`).then(async (res) =>{
+            const response = await res.json()
+            cartItem.push(response);
+            getCartCount();
+            alert(`${response.title} \n Added to cart`)
+           })
+      }
+
 
        function bodyLoad(){
         Catageryload();
         loadProduct("https://fakestoreapi.com/products")
-        // mainSection()
+        getCartCount()
         }
 
         function categoryChnaged(){
@@ -101,7 +116,7 @@
         </div>
 
         <div>
-            <button class="btn btn-warning bi bi-cart4 position-relative"> Your Cart <span class="badge position-absolute bg-danger rounded rounded-circle">0</span> </button>
+            <button class="btn btn-warning bi bi-cart4 position-relative"> Your Cart <span class="badge position-absolute bg-danger rounded rounded-circle"  id ="logic">0</span> </button>
         </div>
     </header>
 

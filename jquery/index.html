@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $('button').click(() => {
+
+                
+
+                fetch('https://fakestoreapi.com/products').then(async (res) => {
+
+                    let data = await res.json();
+
+                    $(`<table border = "2px">
+                    <thead>
+  <tr>
+    <th>id</th>
+    <th>Title</th>
+    <th>Preview</th>
+    <th>price</th>            
+</tr>
+</thead> 
+<tbody>
+</tbody>
+                  </table>  
+                    `).appendTo('body')
+                    
+                    data.map(res => {
+                        $(`     
+            <tr>
+            <td>${res.id}</td>
+            <td>${res.title}</td>
+            <td ><img src="${res.image}" alt="" width="40px" height="40px"></td>
+            <td>${res.price}</td>
+        </tr>
+        `).appendTo('tbody')
+                    })
+               
+               
+               
+                })
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <button>Click to load product</button>
+
+</body>
+
+</html>

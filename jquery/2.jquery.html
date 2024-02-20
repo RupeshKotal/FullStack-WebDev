@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic jquery Form</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(()=>{
+          $('#details').hide()
+          $('button').click(()=>{
+            $('#details').show()
+
+            $('#lblname').html("Name :"+$('#name').val())
+
+            $('#lblprice').html("Price :"+$('#price').val());
+
+            if($('#stock').prop('checked')){
+               $('#lblstock').html("Stock is Available")
+            }else{
+                $('#lblstock').html("Out Of Stock") 
+            }
+
+
+         $('#lblcity').html($('#City').val()) 
+
+          })
+
+
+        })
+
+        
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Name</dt>
+        <dd><input type="text" id="name"></dd>
+        <dt>Price</dt>
+        <dd><input type="number" id="price"></dd>
+        <dt>Stock</dt>
+        <dd><input type="checkbox" id="stock"></dd>
+        <dt>City</dt>
+        <dd>
+            <select id="City">
+            <option >Select a City</option>
+            <option >Maharashtra</option>
+            <option >Mubai</option>
+            <option >Nagpur</option>
+            </select>
+        </dd><br>
+
+        <button>Register</button>
+    </dl>
+
+    <div id="details">
+            <h2>Details</h2>
+            <h4 id="lblname"></h4>
+            <h4 id="lblprice"></h4>
+            <h4 id="lblstock"></h4>
+            <h4 id="lblcity"></h4>
+    </div>
+    
+</body>
+</html>

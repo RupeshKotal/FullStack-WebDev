@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cards</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+//         $(() => {
+//             fetch("https://fakestoreapi.com/products/").then(async (res) => {
+//                 let data = await res.json();
+//                 data.map((d) => {
+//                     console.log(d);
+//                     $(`<div class="card" style="width: 18rem;">
+//          <img src="${d.image}" class="card-img-top" alt="...">
+//          <div class="card-body">
+//     <h5 class="card-title">${d.title}</h5>
+//     <p class="card-text">${d.description}</p>
+//     <a href="#" name="${d.title}" id="btnAdd" class="btn btn-primary">Add To Cart</a>
+//   </div>
+// </div>`).appendTo("#cbody");
+//                 });
+//             });
+
+//             $(document).on('click','#btnAdd',(e)=>{
+//             alert(`${e.target.name}  Product Purcased`)
+//         })
+//         });
+
+
+$(()=>{
+    $.ajax({
+        method:"get",
+        url:'https://fakestoreapi.com/products',
+        success:(data)=>{
+            data.map((d)=>{       
+              $(`<div class="card" style="width: 18rem;">
+         <img src="${d.image}" class="card-img-top" alt="...">
+         <div class="card-body">
+    <h5 class="card-title">${d.title}</h5>
+    <p class="card-text">${d.description}</p>
+    <a href="#" name="${d.title}" id="btnAdd" class="btn btn-primary">Add To Cart</a>
+  </div>
+</div>`).appendTo("#cbody");
+            })
+
+            $(document).on('click',"#btnAdd",(e)=>{
+                alert(e.target.name+"Product Purchased")
+            })
+        }
+    })
+})
+
+        
+    </script>
+</head>
+
+<body>
+    <div id="cbody" style="display: flex; flex-wrap: wrap;">
+        
+    </div>
+</body>
+
+</html>
